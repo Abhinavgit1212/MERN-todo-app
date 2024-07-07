@@ -66,6 +66,8 @@ export function CreateTodo({ setTodos }) {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
+      <div style={{ marginBottom: 10 }} />{" "}
+      {/* Line break between description and deadline */}
       <TextField
         id="deadline"
         style={{
