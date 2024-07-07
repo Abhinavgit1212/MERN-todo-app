@@ -17,7 +17,7 @@ export function CreateTodo({ setTodos }) {
           body: JSON.stringify({
             title: title,
             description: description,
-            deadline: deadline, // Include deadline in the request
+            deadline: new Date(deadline).toISOString(), // Include deadline in the request
           }),
           headers: {
             "Content-type": "application/json",
