@@ -1,5 +1,9 @@
 ## TO DO APPLICATION
 
+##Frontend: React
+##Backend: Node Express
+##deployment: Render+Netify
+
 Build a simple CRUD TO-DO Application, with the following features
 
 - Create a TODO
