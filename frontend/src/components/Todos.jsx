@@ -50,7 +50,7 @@ export function Todos({ todos, setTodos }) {
       body: JSON.stringify({
         title: newTitle,
         description: newDescription,
-        deadline: newDeadline,
+        deadline: new Date(deadline).toISOString(),
       }),
     })
       .then(async (res) => {
