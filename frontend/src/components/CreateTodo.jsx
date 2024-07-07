@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, TextField } from '@mui/material';
+import { Button, TextField } from "@mui/material";
 
 export function CreateTodo({ setTodos }) {
   const [title, setTitle] = useState("");
@@ -7,20 +7,23 @@ export function CreateTodo({ setTodos }) {
   const [deadline, setDeadline] = useState("");
 
   const handleSubmit = async (event) => {
-    event.preventDefault();  // Prevent the default form submission behavior
+    event.preventDefault(); // Prevent the default form submission behavior
 
     try {
-      const response = await fetch("http://localhost:3000/todo", {
-        method: "POST",
-        body: JSON.stringify({
-          title: title,
-          description: description,
-          deadline: deadline,  // Include deadline in the request
-        }),
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://mern-todo-app-vmcd.onrender.com/todo",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            title: title,
+            description: description,
+            deadline: deadline, // Include deadline in the request
+          }),
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
 
       if (response.ok) {
         const json = await response.json();
@@ -76,11 +79,11 @@ export function CreateTodo({ setTodos }) {
         InputLabelProps={{ shrink: true }}
       />
       <Button
-      style={{
-        padding: 25,
-        margin: 10,
-      }}
-        type="submit"  // Use type="submit" to trigger the form submission
+        style={{
+          padding: 25,
+          margin: 10,
+        }}
+        type="submit" // Use type="submit" to trigger the form submission
         variant="contained"
       >
         Create Todo

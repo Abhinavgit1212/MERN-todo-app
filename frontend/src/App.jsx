@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import { CreateTodo } from './components/CreateTodo';
-import { Todos } from './components/Todos';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import { CreateTodo } from "./components/CreateTodo";
+import { Todos } from "./components/Todos";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -9,11 +9,13 @@ function App() {
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const response = await fetch('http://localhost:3000/todos');
+        const response = await fetch(
+          "https://mern-todo-app-vmcd.onrender.com/todos"
+        );
         const data = await response.json();
         setTodos(data.todos);
       } catch (error) {
-        console.error('Error fetching TODOs:', error);
+        console.error("Error fetching TODOs:", error);
       }
     };
 
@@ -23,19 +25,20 @@ function App() {
   return (
     <div
       style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        height: '100vh',
-        paddingTop: '20px',
-        textAlign: 'center'
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        height: "100vh",
+        paddingTop: "20px",
+        textAlign: "center",
       }}
     >
       <h1>Welcome to the TODO App! 🚀</h1>
       <p>Add your tasks below: 📝</p>
       <CreateTodo setTodos={setTodos} /> {/* Pass setTodos as a prop */}
-      <Todos todos={todos} setTodos={setTodos} /> {/* Pass setTodos as a prop */}
+      <Todos todos={todos} setTodos={setTodos} />{" "}
+      {/* Pass setTodos as a prop */}
     </div>
   );
 }

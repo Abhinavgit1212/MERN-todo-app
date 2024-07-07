@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
-import { Checkbox, FormControlLabel, Button, TextField, Box, Card, CardContent, CardActions, Typography } from '@mui/material';
+import React, { useState } from "react";
+import {
+  Checkbox,
+  FormControlLabel,
+  Button,
+  TextField,
+  Box,
+  Card,
+  CardContent,
+  CardActions,
+  Typography,
+} from "@mui/material";
 
 export function Todos({ todos, setTodos }) {
   const [editingTodoId, setEditingTodoId] = useState(null);
-  const [newTitle, setNewTitle] = useState('');
-  const [newDescription, setNewDescription] = useState('');
-  const [newDeadline, setNewDeadline] = useState('');
+  const [newTitle, setNewTitle] = useState("");
+  const [newDescription, setNewDescription] = useState("");
+  const [newDeadline, setNewDeadline] = useState("");
 
   const handleMarkAsCompleted = (id) => {
-    fetch(`http://localhost:3000/todos/${id}`, {
-      method: 'PATCH',
+    fetch(`https://mern-todo-app-vmcd.onrender.com/todos/${id}`, {
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ completed: true }),
     })
@@ -19,73 +29,71 @@ export function Todos({ todos, setTodos }) {
         if (res.ok) {
           const updatedTodo = await res.json();
           setTodos((prevTodos) =>
-            prevTodos.map((todo) =>
-              todo._id === id ? updatedTodo : todo
-            )
+            prevTodos.map((todo) => (todo._id === id ? updatedTodo : todo))
           );
-          alert('Todo marked as completed');
+          alert("Todo marked as completed");
         } else {
-          console.error('Failed to mark todo as completed');
+          console.error("Failed to mark todo as completed");
         }
       })
       .catch((error) => {
-        console.error('Error marking todo as completed:', error);
+        console.error("Error marking todo as completed:", error);
       });
   };
 
   const handleUpdateTodo = (id) => {
-    fetch(`http://localhost:3000/todos/${id}`, {
-      method: 'PATCH',
+    fetch(`https://mern-todo-app-vmcd.onrender.com/todos/${id}`, {
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title: newTitle, description: newDescription, deadline: newDeadline }),
+      body: JSON.stringify({
+        title: newTitle,
+        description: newDescription,
+        deadline: newDeadline,
+      }),
     })
       .then(async (res) => {
         if (res.ok) {
           const updatedTodo = await res.json();
           setTodos((prevTodos) =>
-            prevTodos.map((todo) =>
-              todo._id === id ? updatedTodo : todo
-            )
+            prevTodos.map((todo) => (todo._id === id ? updatedTodo : todo))
           );
           setEditingTodoId(null);
-          setNewTitle('');
-          setNewDescription('');
-          setNewDeadline('');
-          alert('Todo updated');
+          setNewTitle("");
+          setNewDescription("");
+          setNewDeadline("");
+          alert("Todo updated");
         } else {
-          console.error('Failed to update todo');
+          console.error("Failed to update todo");
         }
       })
       .catch((error) => {
-        console.error('Error updating todo:', error);
+        console.error("Error updating todo:", error);
       });
   };
 
   const handleDeleteTodo = (id) => {
-    fetch(`http://localhost:3000/todos/${id}`, {
-      method: 'DELETE',
+    fetch(`https://mern-todo-app-vmcd.onrender.com/todos/${id}`, {
+      method: "DELETE",
     })
       .then((res) => {
         if (res.ok) {
-          setTodos((prevTodos) =>
-            prevTodos.filter((todo) => todo._id !== id)
-          );
-          alert('Todo deleted');
+          setTodos((prevTodos) => prevTodos.filter((todo) => todo._id !== id));
+          alert("Todo deleted");
         } else {
-          console.error('Failed to delete todo');
+          console.error("Failed to delete todo");
         }
       })
       .catch((error) => {
-        console.error('Error deleting todo:', error);
+        console.error("Error deleting todo:", error);
       });
   };
 
   return (
     <div>
       {todos.map((todo) => (
-        <Card key={todo._id} style={{ marginBottom: '16px' }}>
+        <Card key={todo._id} style={{ marginBottom: "16px" }}>
           <CardContent>
             {editingTodoId === todo._id ? (
               <Box>
@@ -119,7 +127,7 @@ export function Todos({ todos, setTodos }) {
                     variant="contained"
                     color="primary"
                     onClick={() => handleUpdateTodo(todo._id)}
-                    style={{ marginRight: '10px' }}
+                    style={{ marginRight: "10px" }}
                   >
                     Update
                   </Button>
@@ -153,7 +161,9 @@ export function Todos({ todos, setTodos }) {
                       color="primary"
                     />
                   }
-                  label={todo.completed ? '✅ Completed' : '❓ Mark as Completed'}
+                  label={
+                    todo.completed ? "✅ Completed" : "❓ Mark as Completed"
+                  }
                 />
                 <CardActions>
                   <Button
@@ -163,9 +173,13 @@ export function Todos({ todos, setTodos }) {
                       setEditingTodoId(todo._id);
                       setNewTitle(todo.title);
                       setNewDescription(todo.description);
-                      setNewDeadline(todo.deadline ? new Date(todo.deadline).toISOString().slice(0, 16) : ''); 
+                      setNewDeadline(
+                        todo.deadline
+                          ? new Date(todo.deadline).toISOString().slice(0, 16)
+                          : ""
+                      );
                     }}
-                    style={{ marginRight: '10px' }}
+                    style={{ marginRight: "10px" }}
                   >
                     Edit
                   </Button>
