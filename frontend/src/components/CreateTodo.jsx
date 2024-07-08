@@ -7,7 +7,7 @@ export function CreateTodo({ setTodos }) {
   const [deadline, setDeadline] = useState("");
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
+    event.preventDefault(); 
 
     try {
       const response = await fetch(
