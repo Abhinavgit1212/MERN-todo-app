@@ -17,7 +17,7 @@ export function CreateTodo({ setTodos }) {
           body: JSON.stringify({
             title: title,
             description: description,
-            deadline: new Date(deadline).toISOString(), // Include deadline in the request
+            deadline: new Date(deadline).toISOString(),
           }),
           headers: {
             "Content-type": "application/json",
@@ -27,7 +27,7 @@ export function CreateTodo({ setTodos }) {
 
       if (response.ok) {
         const json = await response.json();
-        setTodos((prevTodos) => [...prevTodos, json.todo]); // Update to use the todo object returned
+        setTodos((prevTodos) => [...prevTodos, json.todo]); 
         alert("Todo added");
         setTitle("");
         setDescription("");
@@ -67,7 +67,7 @@ export function CreateTodo({ setTodos }) {
         onChange={(e) => setDescription(e.target.value)}
       />
       <div style={{ marginBottom: 10 }} />{" "}
-      {/* Line break between description and deadline */}
+      
       <TextField
         id="deadline"
         style={{
@@ -85,7 +85,7 @@ export function CreateTodo({ setTodos }) {
           padding: 25,
           margin: 10,
         }}
-        type="submit" // Use type="submit" to trigger the form submission
+        type="submit" 
         variant="contained"
       >
         Create Todo
