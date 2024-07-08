@@ -20,7 +20,7 @@ function App() {
     };
 
     fetchTodos();
-  }, []); // Empty dependency array means this effect runs once when the component mounts
+  }, []);
 
   return (
     <div
@@ -36,9 +36,8 @@ function App() {
     >
       <h1>Welcome to the TODO App! 🚀</h1>
       <p>Add your tasks below: 📝</p>
-      <CreateTodo setTodos={setTodos} /> {/* Pass setTodos as a prop */}
+      <CreateTodo setTodos={setTodos} /> 
       <Todos todos={todos} setTodos={setTodos} />{" "}
-      {/* Pass setTodos as a prop */}
     </div>
   );
 }
